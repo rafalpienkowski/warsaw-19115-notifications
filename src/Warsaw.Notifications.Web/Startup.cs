@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Warsaw.Notifications.Domain.Components;
 
 namespace Warsaw.Notifications.Web
 {
@@ -31,6 +32,7 @@ namespace Warsaw.Notifications.Web
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.AddTransient<INotificationSystem, NotificationSystem>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

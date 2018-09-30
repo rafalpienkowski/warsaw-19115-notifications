@@ -8,7 +8,7 @@ using Warsaw.Notifications.Web.Models;
 
 namespace Warsaw.Notifications.Web.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         public IActionResult Index()
         {
