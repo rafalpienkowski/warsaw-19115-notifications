@@ -75,6 +75,13 @@
         </script>
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
+    <script>
+    $(document).ready(function(){
+        $('a').click(function(event){
+            $('#loading').modal('show');
+        });
+    });
+    </script>
 
     @RenderSection("Scripts", required: false)
 </body>

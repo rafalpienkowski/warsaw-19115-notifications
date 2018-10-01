@@ -1,15 +1,17 @@
 using System.Collections.Generic;
 using Warsaw.Notifications.Domain.Components.Models;
+using Warsaw.Notifications.Domain.Repositories;
 
 namespace Warsaw.Notifications.Domain.Components
 {
     public class NotificationSystem : INotificationSystem
     {
         private readonly string _apiKey = "9b03df8e-d95a-4747-a889-c6c98ad3de0b";
+        private readonly INotificationsRepository _repository;
 
         public NotificationSystem()
         {
-            
+            _repository = new NotificationRepository();
         }
 
 

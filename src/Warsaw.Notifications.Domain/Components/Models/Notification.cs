@@ -13,16 +13,11 @@ namespace Warsaw.Notifications.Domain.Components.Models
         public object Street2 { get; set; }
         public string NotificationType { get; set; }
         public DateTime CreateDate { get; set; }
-        public string SiebelEventId { get; set; }
         public string Source { get; set; }
         public string Street { get; set; }
         public string DeviceType { get; set; }
         public List<Status> Statuses { get; set; } = new List<Status>();
-        public double YCoordOracle { get; set; }
-        public double XCoordOracle { get; set; }
         public string NotificationNumber { get; set; }
-        public int XCoordWGS84 { get; set; }
-        public int YCoordWGS84 { get; set; }
         public string Event { get; set; }
     }
 }
