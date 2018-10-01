@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading;
 using Microsoft.AspNetCore.Mvc;
 using Warsaw.Notifications.Domain.Components;
 using Warsaw.Notifications.Domain.Components.Models;
@@ -21,6 +22,9 @@ namespace Warsaw.Notifications.Web.Controllers {
 
         [Route("Notification/Search/{districtName}")]
         public IActionResult Search(string districtName){
+
+            Thread.Sleep(19999);
+
             ViewBag.AvaliableDistricts = _avaliableDistricts;
             var notifications = new List<NotificationViewModel>{
                 new NotificationViewModel{

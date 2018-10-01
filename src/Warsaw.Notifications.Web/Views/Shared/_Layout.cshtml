@@ -32,7 +32,6 @@
                 <ul class="nav navbar-nav">
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
                     <li><a asp-area="" asp-controller="Notification" asp-action="Index">Notifications</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
                 </ul>
             </div>
@@ -47,6 +46,13 @@
         <footer>
             <p>&copy; 2018 - Warsaw 19115 Notifications</p>
         </footer>
+    </div>
+
+    <div class="modal fade" id="loading" role="dialog" data-backdrop="static" data-keyboard="false">
+        <div class="spinner">
+            <div class="double-bounce1"></div>
+            <div class="double-bounce2"></div>
+        </div>
     </div>
 
     <environment include="Development">

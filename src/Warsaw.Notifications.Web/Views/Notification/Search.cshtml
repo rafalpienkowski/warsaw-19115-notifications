@@ -1,7 +1,18 @@
-@Model IEnumerable<NotificationViewModel>
+@model IEnumerable<NotificationViewModel>
+
+<div class="row">
+    <div class="col-md-12">
+        @foreach (var item in Model)
+        {
+            <h2>@item.District</h2>
+        }
+    </div> 
+</div>  
 
 
-@foreach (var item in Model)
-{
-    <h2>@item.District</h2>
-}
+<div class="row">
+    <div class="col-md-12">
+            <a class="btn btn-default" asp-controller="Notification" asp-action="Index">Back</a>
+        </p>
+    </div>
+</div>
