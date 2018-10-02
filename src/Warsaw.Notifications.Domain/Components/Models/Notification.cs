@@ -10,13 +10,12 @@ namespace Warsaw.Notifications.Domain.Components.Models
         public string Subcategory { get; set; }
         public string District { get; set; }
         public object AparmentNumber { get; set; }
-        public object Street2 { get; set; }
         public string NotificationType { get; set; }
         public DateTime CreateDate { get; set; }
         public string Source { get; set; }
         public string Street { get; set; }
         public string DeviceType { get; set; }
-        public List<Status> Statuses { get; set; } = new List<Status>();
+        public IEnumerable<Status> Statuses { get; set; } = new List<Status>();
         public string NotificationNumber { get; set; }
         public string Event { get; set; }
     }

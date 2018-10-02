@@ -1,3 +1,7 @@
+using System.Runtime.CompilerServices;
+
+[assembly:InternalsVisibleTo("Warsaw.Notifications.Domain.Unit.Tests")]
+
 namespace Warsaw.Notifications.Domain.Components.Models
 {
     public struct District

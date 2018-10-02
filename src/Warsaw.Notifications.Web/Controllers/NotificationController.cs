@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Warsaw.Notifications.Domain.Components;
@@ -18,19 +19,20 @@ namespace Warsaw.Notifications.Web.Controllers {
             _mapper = mapper;
         }
 
-        public IActionResult Index () 
+        public async Task<IActionResult> Index() 
         {
-            ViewBag.AvaliableDistricts = _notificationSystem.GetAvaliableDistricts();
-            return View ();
+            ViewBag.AvaliableDistricts = await _notificationSystem.GetAvaliableDistrictsAsync();
+            return View();
         }
 
         [Route ("Notification/Search/{districtName}")]
-        public IActionResult Search (string districtName) 
+        public async Task<IActionResult> Search(string districtName) 
         {
-            var district = _notificationSystem.GetAvaliableDistricts()
-                .SingleOrDefault(d => d.Name.Equals(districtName));
+            var districts = await _notificationSystem.GetAvaliableDistrictsAsync();
+            var district = districts.SingleOrDefault(d => d.Name.Equals(districtName));
 
-            var notificationsRaw = _notificationSystem.GetNotificationsForDistrict(district);
+            ViewBag.District = district.Name;
+            var notificationsRaw = await _notificationSystem.GetNotificationsForDistrictAsync(district);
             var notifications = _mapper.Map<List<NotificationViewModel>>(notificationsRaw);
             return View (notifications);
         }

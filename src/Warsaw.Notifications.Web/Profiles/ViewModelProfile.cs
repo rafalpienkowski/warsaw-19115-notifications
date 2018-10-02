@@ -9,9 +9,6 @@ namespace Warsaw.Notifications.Web.Profiles
         public ViewModelProfile()
         {
             CreateMap<NotificationViewModel, Notification>();
-            CreateMap<StatusViewModel, Status>();
-
-            
         }
     }
 }

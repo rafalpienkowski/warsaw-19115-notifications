@@ -1,41 +1,32 @@
 using System.Collections.Generic;
 using Warsaw.Notifications.Domain.Components.Models;
 using Warsaw.Notifications.Domain.Repositories;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Warsaw.Notifications.Domain.Components
 {
     public class NotificationSystem : INotificationSystem
     {
-        private readonly string _apiKey = "9b03df8e-d95a-4747-a889-c6c98ad3de0b";
-        private readonly INotificationsRepository _repository;
+        private readonly INotificationRepository _repository;
 
         public NotificationSystem()
         {
             _repository = new NotificationRepository();
         }
 
-
-        public IEnumerable<District> GetAvaliableDistricts()
+        public Task<IEnumerable<District>> GetAvaliableDistrictsAsync()
         {
-            return new List<District>
+            return Task.FromResult<IEnumerable<District>>(new List<District>
             { 
                 new District("Bemowo"),
                 new District("Wola")
-            };
+            });
         }
 
-        public IEnumerable<Notification> GetNotificationsForDistrict(District district)
+        public Task<IEnumerable<Notification>> GetNotificationsForDistrictAsync(District district)
         {
-            return new List<Notification>{
-                new Notification {
-                    Category = "Proces Inwestycyjny",
-                    City = "Warszawa",
-                    Subcategory = "Śmieci",
-                    District = "Bemowo",
-                    NotificationNumber = "30892/13",
-                    NotificationType = "INCYDENT",
-                }
-            };
+            return _repository.GetNotificationsForDistrictAsync(district.Name);
         }
     }
 }

@@ -2,7 +2,7 @@
 @model IEnumerable<NotificationViewModel>
 
 <h2>
-    Results:
+    Results for @ViewBag.District:
 </h2>
 <div class="row">
     <div class="col-md-12">
@@ -11,14 +11,12 @@
                 <th>City</th>
                 <th>District</th>
                 <th>Street</th>
-                <th>Aparment Number</th>
                 <th>Source</th>
                 <th>Notification Type</th>
                 <th>Notification Number</th>
                 <th>Create Date</th>
                 <th>Category</th>
                 <th>Subcategory</th>
-                <th>Statuses</th>
             </tr>
             @foreach (var item in Model)
             {
@@ -26,14 +24,12 @@
                     <td>@item.City</td>
                     <td>@item.District</td>
                     <td>@item.Street</td>
-                    <td>@item.AparmentNumber</td>
                     <td>@item.Source</td>
                     <td>@item.NotificationType</td>
                     <td>@item.NotificationNumber</td>
                     <td>@item.CreateDate</td>
                     <td>@item.Category</td>
                     <td>@item.Subcategory</td>
-                    <td>@{string.Join(",", @item.Statuses.Select(s => s.ToString()).ToArray()); }</td>
                 </tr>
             }
         </table>
