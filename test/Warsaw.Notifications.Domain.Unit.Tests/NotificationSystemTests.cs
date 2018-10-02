@@ -16,7 +16,7 @@ namespace Warsaw.Notifications.Domain.Unit.Tests
         [Fact]
         public async Task GetAvaliableDistrictsAsync_ShouldReturnOnlyWolaAndBemowo()
         {
-            _notificationSystem = new NotificationSystem();
+            _notificationSystem = new NotificationSystem(string.Empty);
             var expectedResult = new List<District>
             { 
                 new District("Bemowo"),

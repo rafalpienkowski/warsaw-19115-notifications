@@ -14,7 +14,7 @@ namespace Warsaw.Notifications.Domain.Integration.Tests
         [Fact]
         public async Task GetNotificationsForDistrictAsync_ShouldReturnDataForWola()
         {
-            _sut = new NotificationRepository();
+            _sut = new NotificationRepository("test");
 
             var result = await _sut.GetNotificationsForDistrictAsync("Wola");
 

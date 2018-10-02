@@ -3,6 +3,7 @@ using Warsaw.Notifications.Domain.Components.Models;
 using Warsaw.Notifications.Domain.Repositories;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Options;
 
 namespace Warsaw.Notifications.Domain.Components
 {
@@ -10,9 +11,14 @@ namespace Warsaw.Notifications.Domain.Components
     {
         private readonly INotificationRepository _repository;
 
-        public NotificationSystem()
+        internal NotificationSystem(string apikey)
         {
-            _repository = new NotificationRepository();
+            _repository = new NotificationRepository(apikey);
+        }
+
+        public NotificationSystem(IOptions<ConfigurationManager> settings)
+        {
+            _repository = new NotificationRepository(settings);
         }
 
         public Task<IEnumerable<District>> GetAvaliableDistrictsAsync()

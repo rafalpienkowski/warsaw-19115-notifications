@@ -8,9 +8,10 @@ using System.Threading.Tasks;
 using Warsaw.Notifications.Domain.Repositories.Models;
 using DomainModel = Warsaw.Notifications.Domain.Components.Models;
 using Warsaw.Notifications.Domain.Repositories.Extensions;
+using Microsoft.Extensions.Options;
+using Warsaw.Notifications.Domain.Components.Models;
 
 [assembly:InternalsVisibleTo("Warsaw.Notifications.Domain.Integration.Tests")]
-
 namespace Warsaw.Notifications.Domain.Repositories
 {
     internal class NotificationRepository : INotificationRepository
@@ -18,7 +19,7 @@ namespace Warsaw.Notifications.Domain.Repositories
         private readonly HttpClient _client;
         private readonly string _apiKey;
         
-        public NotificationRepository()
+        public NotificationRepository(IOptions<ConfigurationManager> settings)
         {
             _client = new HttpClient();
             _client.BaseAddress = new Uri("https://api.um.warszawa.pl");
@@ -26,7 +27,12 @@ namespace Warsaw.Notifications.Domain.Repositories
             _client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
 
-            _apiKey = "";
+            _apiKey = settings.Value.WarsawApiKey;
+        }
+
+        internal NotificationRepository(string apiKey) : base()
+        {
+            _apiKey = apiKey;
         }
 
         public async Task<IEnumerable<DomainModel.Notification>> GetNotificationsForDistrictAsync(string districtName)

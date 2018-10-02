@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Warsaw.Notifications.Domain.Components;
+using Warsaw.Notifications.Domain.Components.Models;
 
 namespace Warsaw.Notifications.Web
 {
@@ -35,6 +36,9 @@ namespace Warsaw.Notifications.Web
 
             services.AddTransient<INotificationSystem, NotificationSystem>();
 
+            services.Configure<ConfigurationManager>(Configuration);
+            services.AddOptions();
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddAutoMapper();
         }
@@ -42,7 +46,7 @@ namespace Warsaw.Notifications.Web
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            if (env.IsDevelopment())
+            if (env.IsEnvironment("Dev"))
             {
                 app.UseDeveloperExceptionPage();
             }
