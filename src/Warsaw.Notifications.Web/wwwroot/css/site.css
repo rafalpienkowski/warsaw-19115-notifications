@@ -76,3 +76,11 @@ body {
         -webkit-transform: scale(1.0);
     }
 }
+
+.top-buffer { 
+    margin-top:20px; 
+}
+
+.bottom-buffer { 
+    margin-top:20px; 
+}
