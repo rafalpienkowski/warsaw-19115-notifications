@@ -19,18 +19,21 @@ namespace Warsaw.Notifications.Domain.Repositories
         private readonly HttpClient _client;
         private readonly string _apiKey;
         
-        public NotificationRepository(IOptions<ConfigurationManager> settings)
+        private NotificationRepository()
         {
             _client = new HttpClient();
             _client.BaseAddress = new Uri("https://api.um.warszawa.pl");
             _client.DefaultRequestHeaders.Accept.Clear();
             _client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
+        }
 
+        public NotificationRepository(IOptions<ConfigurationManager> settings) : this()
+        {
             _apiKey = settings.Value.WarsawApiKey;
         }
 
-        internal NotificationRepository(string apiKey) : base()
+        internal NotificationRepository(string apiKey) : this()
         {
             _apiKey = apiKey;
         }
