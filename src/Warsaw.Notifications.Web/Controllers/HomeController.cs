@@ -20,6 +20,11 @@ namespace Warsaw.Notifications.Web.Controllers
             return View();
         }
 
+        public IActionResult Deployment()
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();
