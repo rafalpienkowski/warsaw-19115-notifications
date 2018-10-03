@@ -1,0 +1,140 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "siteName": {
+            "type": "string",
+            "defaultValue": "warsaw-19115-notifications",
+            "metadata": {
+                "description": "Site name"
+            }
+        },
+        "serviceOwner": {
+            "type": "string",
+            "defaultValue": "rafal.pienkowski",
+            "metadata": {
+                "description": "Sevice Owner"
+            }
+        },
+        "sku": {
+            "type": "string",
+            "defaultValue": "F1",
+            "allowedValues": [
+                "F1",
+                "D1",
+                "B1",
+                "B2",
+                "B3",
+                "S1",
+                "S2",
+                "S3",
+                "P1",
+                "P2",
+                "P3",
+                "P4"
+            ],
+            "metadata": {
+                "description": "Describes plan's pricing tier and capacity. Check details at https://azure.microsoft.com/en-us/pricing/details/app-service/"
+            }
+        },
+        "warsawApiKey": {
+            "type": "string",
+            "defaultValue": "WarsawApiKey",
+            "metadata": {
+                "description": "WarsawApiKey is being used to comminicatge with external API"
+            }
+        },
+        "environmentType": {
+            "type": "string",
+            "defaultValue": "dev",
+            "allowedValues": [
+                "dev",
+                "test",
+                "prod"
+            ],
+            "metadata": {
+                "description": "Environment type"
+            }
+        }
+    },
+    "variables": {
+        "appServicePlanName": "[concat(parameters('siteName'), '-asp')]"
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Web/serverfarms",
+            "name": "[variables('appServicePlanName')]",
+            "apiVersion": "2016-09-01",
+            "sku": {
+                "name": "[parameters('sku')]"
+            },
+            "properties": {
+                "name": "[variables('appServicePlanName')]"
+            },
+            "location": "[resourceGroup().location]",
+            "tags": {
+                "ServiceOwner": "[parameters('serviceOwner')]"
+            }
+        },
+        {
+            "type": "Microsoft.Web/sites",
+            "name": "[parameters('siteName')]",
+            "apiVersion": "2016-08-01",
+            "properties": {
+                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('appServicePlanName'))]",
+                "siteConfig": {
+                    "defaultDocuments": [
+                        "index.html"
+                    ],
+                    "appSettings": [
+                        {
+                            "name": "WarsawApiKey",
+                            "value": "[parameters('warsawApiKey')]"
+                        },
+                        {
+                            "name": "ASPNETCORE_ENVIRONMENT",
+                            "value": "[parameters('environmentType')]"
+                        },
+                        {
+                            "name": "ENVIRONMENT_TYPE",
+                            "value": "[parameters('environmentType')]"
+                        }
+                    ]
+                }
+            },
+            "location": "[resourceGroup().location]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/serverfarms', variables('appServicePlanName'))]"
+            ],
+            "tags": {
+                "ServiceOwner": "[parameters('serviceOwner')]"
+            },
+            "resources": [
+                {
+                    "apiVersion": "2016-08-01",
+                    "name": "web",
+                    "type": "sourcecontrols",
+                    "dependsOn": [
+                        "[resourceId('Microsoft.Web/Sites', parameters('siteName'))]"
+                    ],
+                    "properties": {
+                        "RepoUrl": "https://github.com/rafalpienkowski/warsaw-19115-notofications.git",
+                        "branch": "master"
+                    }
+                },
+                {
+                    "apiVersion": "2018-02-01",
+                    "name": "web",
+                    "type": "config",
+                    "dependsOn": [
+                        "[resourceId('Microsoft.Web/Sites', parameters('siteName'))]"
+                    ],
+                    "properties": {
+                        "http20enabled": "true"
+                    }
+                }
+            ]
+        }
+    ],
+    "outputs": {}
+}
