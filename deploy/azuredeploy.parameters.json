@@ -3,7 +3,7 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "siteName": {
-      "value": "warsaw-19115-notifications"
+      "value": ""
     },
     "serviceOwner": {
       "value": "rafal.pienkowski"
@@ -13,6 +13,9 @@
     },
     "environmentType": {
       "value": "dev"
+    },
+    "sku": {
+      "value": "F1"
     }
   }
 }

@@ -1,0 +1,88 @@
+<div class="row">
+    <div class="col-md-12 top-buffer">
+        To deploy the application to the Azure you to perform following steps.
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <h4>Prerequisites:</h4>
+        <i class="fas fa-angle-right"></i> Azure Subscription <br />
+        <i class="fas fa-angle-right"></i> <a href="https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest">Azure CLI installed on local machine</a> <br />
+    </div>
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <h4>Steps:</h4>
+        <i class="fas fa-angle-right"></i> Login to the Azure <br/>
+        <blockquote><pre><code>
+            az login
+        </code></pre></blockquote>
+        <b>Note:</b><br/>
+        There shoule pop up a default browser window and prompt for Azure portal credentials.
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 top-buffer">
+        <i class="fas fa-angle-right"></i> (Optional) In case of multiple Subscriptions set the proper one by<br/>
+        <blockquote><pre><code>
+            az account set --subscription &lt;&lt;SubscriptionId&gt;&gt; 
+        </code></pre></blockquote>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <i class="fas fa-angle-right"></i> Create Resource Group <br/>
+        <div>
+            <blockquote><pre><code>
+            az group create --name &lt;&lt;Resource group name&gt;&gt; --location &lt;&lt;Resource group location&gt;&gt;
+            </code></pre></blockquote>
+            <i>Example:</i><br />
+            <blockquote><code>
+            az group create --name my-resource-group --location westeurope
+            </code></blockquote>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <i class="fas fa-angle-right"></i> Prepare parameters file <br/>
+        <div class="top-buffer">
+            <p>
+                Before the depoly of the application you have to set up following parameters:
+            </p>
+            <ul>
+                <li>siteName - Name of the site. It should be unique inside Azure</li>
+                <li>serviceOwner - Name of the Service Owner. Default value: rafal.pienkowski</li>
+                <li>warsawApiKey - Warsaw API key used for authentication purposes</li>
+                <li>environmentType - Environment Type. Default value: dev</li>
+                <li>sku - SKU. Default value: F1. <a href="https://docs.microsoft.com/en-us/azure/templates/microsoft.web/serverfarms#SkuDescription">More details</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <i class="fas fa-angle-right"></i> Deploy resources <br/>
+        <div>
+            <blockquote><pre><code>
+            az group deployment create -g &lt;&lt;Resource Group Name&gt;&gt; --template-file azuredeploy.json --parameters azuredeploy.parameters.json --name &lt;&lt;Name of deployment&gt;&gt; 
+            </code></pre></blockquote>
+            <i>Example:</i><br />
+            <blockquote><code>
+            az group deployment create -g my-resource-group --template-file azuredeploy.json --parameters azuredeploy.parameters.json--name deploy1
+            </code></blockquote>
+            ARM Template and example parameters could be found in my Github repo under following urls: <br />
+            <ul>
+            <li><a href="https://github.com/rafalpienkowski/warsaw-19115-notofications/blob/master/deploy/azuredeploy.json"><i class="fab fa-github"></i> azuredeploy.json</a></li>
+            <li><a href="https://github.com/rafalpienkowski/warsaw-19115-notofications/blob/master/deploy/azuredeploy.parameters.json"><i class="fab fa-github"></i> azuredeploy.parameters.json</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<hr />
+<div class="row">
+    <div class="col-md-12">  
+        <i class="fas fa-angle-right"></i> Enjoy!<br/>
+    </div>
+</div>

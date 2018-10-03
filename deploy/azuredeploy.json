@@ -5,6 +5,7 @@
         "siteName": {
             "type": "string",
             "defaultValue": "warsaw-19115-notifications",
+            "minLength": 1,
             "metadata": {
                 "description": "Site name"
             }
@@ -40,6 +41,7 @@
         "warsawApiKey": {
             "type": "string",
             "defaultValue": "WarsawApiKey",
+            "minLength": 1,
             "metadata": {
                 "description": "WarsawApiKey is being used to comminicatge with external API"
             }
